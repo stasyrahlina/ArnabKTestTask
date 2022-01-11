@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { ContextApp, ContextType } from '../context';
 import { Message } from '../Api'
 
@@ -12,21 +12,27 @@ import {
 } from '../styles'
 
 const Card: React.FC<{ msg: Message }> = ({ msg }) => {
-  const Context = useContext<ContextType | null>(ContextApp)
+  const { dispatch } = useContext<ContextType>(ContextApp)
   
-  if (!Context || !msg) return null
+  if (!msg) return null
   
-  const { dispatch } = Context
-  
+  const handleClick = ():void => {
+    if (dispatch) {
+      dispatch({type: 'deleteSingle', payload: msg.message})
+    } else {
+      console.log('Error: Context empty')
+    }
+  }
+
   return (
-    <StyledCard type={msg.priority} >
+    <StyledCard data-testid='card' type={msg.priority} >
       <CardContent>
         <Typography color="textSecondary" gutterBottom>
           {msg.message}
         </Typography>
       </CardContent>
       <CustomCardActions>
-        <CustomButton onClick={() => dispatch({type: 'deleteSingle', payload: msg.message}) }>Clear</CustomButton>
+        <CustomButton onClick={handleClick}>Clear</CustomButton>
       </CustomCardActions>
     </StyledCard>
   )

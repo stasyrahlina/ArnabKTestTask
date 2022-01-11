@@ -15,7 +15,7 @@ export const AppContainer = styled('div')`
 export const AppTitle = styled('h1')`
   margin: 10px 0;
 `
-export const Header = styled('header')`
+export const StyledHeader = styled('header')`
 `
 export const ButtonContainer = styled('div')`
   display: flex;
@@ -45,7 +45,6 @@ export const Messages = styled('div')`
   flex-grow: 0;
   gap: 10px;
 `
-
 export const CustomButton = styled(Button, {
   shouldForwardProp: (prop) => prop !== "primary"
 })<{primary?: boolean }>`

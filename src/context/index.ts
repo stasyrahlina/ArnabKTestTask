@@ -9,11 +9,11 @@ type ActionType =
 | {type: 'deleteSingle', payload: string}
 
 export interface ContextType {
-  dispatch: Dispatch<ActionType>
-  state: Message[]
+  dispatch?: Dispatch<ActionType>
+  state?: Message[]
 }
 
-export const ContextApp = React.createContext<ContextType | null>(null);
+export const ContextApp = React.createContext<ContextType>({});
 
 export const messagesReducer = (state: Message[] | [] , action: ActionType) => {
   switch (action.type) {
